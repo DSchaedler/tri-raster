@@ -1,18 +1,13 @@
 def tick(args)
-  args.gtk.log_level = :off
-
   tick_zero(args) if args.state.tick_count.zero?
 
   args.outputs.sprites << { x: args.grid.left, y: args.grid.bottom, w: args.grid.w, h: args.grid.h, path: :triangle }.sprite!
 
   reset_button(args)
-
   args.outputs.debug << args.gtk.framerate_diagnostics_primitives
 end
 
 def tick_zero(args)
-
-  args.render_target(:triangle).clear_before_render = true
   triangle = pick_vertecies(args)
   triangle = triangle.sort_by { |point| point[1] }
   triangle = triangle.reverse
