@@ -11,6 +11,8 @@ def tick(args)
 end
 
 def tick_zero(args)
+
+  args.render_target(:triangle).clear_before_render = true
   triangle = pick_vertecies(args)
   triangle = triangle.sort_by { |point| point[1] }
   triangle = triangle.reverse
@@ -20,7 +22,6 @@ def tick_zero(args)
 
   vertex_4 = [(triangle[1][1] - x_intercept) / line_slope, triangle[1][1]]
 
-  # /\
   leg_0 = [triangle[0], triangle[1]]
   leg_0_slope = args.geometry.line_slope([leg_0[0][0], leg_0[0][1], leg_0[1][0], leg_0[1][1]])
   leg_0_intercept = triangle[0][1] - (leg_0_slope * triangle[0][0])
@@ -29,7 +30,6 @@ def tick_zero(args)
   leg_1_slope = args.geometry.line_slope([leg_1[0][0], leg_1[0][1], leg_1[1][0], leg_1[1][1]])
   leg_1_intercept = triangle[0][1] - (leg_1_slope * triangle[0][0])
 
-  # \/
   leg_2 = [triangle[2], triangle[1]]
   leg_2_slope = args.geometry.line_slope([leg_2[0][0], leg_2[0][1], leg_2[1][0], leg_2[1][1]])
   leg_2_intercept = triangle[2][1] - (leg_2_slope * triangle[2][0])
@@ -40,21 +40,21 @@ def tick_zero(args)
 
   y_iter = triangle[0][1]
   while y_iter >= vertex_4[1]
-    args.render_target(:triangle).lines << {
-      x: (y_iter - leg_0_intercept) / leg_0_slope,
-      y: y_iter,
-      x2: (y_iter - leg_1_intercept) / leg_1_slope,
-      y2: y_iter
-    }.line!
-    y_iter -= 1
+   args.render_target(:triangle).lines << {
+     x: (y_iter - leg_0_intercept) / leg_0_slope,
+     y: y_iter,
+     x2: (y_iter - leg_1_intercept) / leg_1_slope,
+     y2: y_iter
+   }.line!
+   y_iter -= 1
   end
 
   y_iter = triangle[2][1]
-  while y_iter >= vertex_4[1]
+  while y_iter <= vertex_4[1]
     args.render_target(:triangle).lines << {
-      x: (y_iter - leg_0_intercept) / leg_0_slope,
+      x: (y_iter - leg_2_intercept) / leg_2_slope,
       y: y_iter,
-      x2: (y_iter - leg_1_intercept) / leg_1_slope,
+      x2: (y_iter - leg_3_intercept) / leg_3_slope,
       y2: y_iter
     }.line!
     y_iter += 1

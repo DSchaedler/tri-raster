@@ -3,8 +3,8 @@
 
 devid=todo-change-me
 devtitle=TODO: My Name &lt;todo@example.com&gt;
-gameid=flood-fill
-gametitle=flood-fill
+gameid=tri-raster
+gametitle=tri-raster
 version=0.1.0
 icon=metadata/icon.png
 compile_ruby=false

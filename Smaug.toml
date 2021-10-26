@@ -1,8 +1,8 @@
 [project]
 # The name of your game's executable. This should only contain a-z, A-Z, 0-9, _ or -.
-name = "flood-fill"
+name = "tri-raster"
 # The game's title. This will show up in the tile bar of your executable.
-title = "flood-fill"
+title = "tri-raster"
 version = "0.1.0"
 authors = ["TODO: My Name <todo@example.com>"]
 icon = "metadata/icon.png"
